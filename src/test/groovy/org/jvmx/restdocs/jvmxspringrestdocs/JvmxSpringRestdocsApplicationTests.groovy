@@ -11,6 +11,7 @@ class JvmxSpringRestdocsApplicationTests {
 
 	@Test
 	void contextLoads() {
+    assert 2 != 2
 	}
 
 }
