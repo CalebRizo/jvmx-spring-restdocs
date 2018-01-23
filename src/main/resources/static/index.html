@@ -83,20 +83,97 @@ assert REST == 'Principios de arquitectura de Software'
           </section>
           <section>
             <h3>Level 0: the swamp of pox</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="level-0">
+          </section>
+          <section>
+            <h3>Level 0: the swamp of pox</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>POST</td>
+                <td>appointmentService</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>appointmentService</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 1: resources</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="level-1">
+          </section>
+          <section>
+            <h3>Level 1: resources</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>POST</td>
+                <td>doctor/mjones</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>slots/1234</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 2: verbs</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="level-2">
+          </section>
+          <section>
+            <h3>Level 2: verbs</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>GET</td>
+                <td>doctor/mjones</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>slots/1234</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 3: hypermedia controls</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
           </section>
           <section>
             <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
               Martin Fowler - Richardson Maturity Model
             </a>
+            <img src="https://martinfowler.com/img/mf-cologne.jpg" alt="Martin-Fowler">
           </section>
         </section>
 
