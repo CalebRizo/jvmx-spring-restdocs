@@ -40,13 +40,38 @@
             <h2>¿Que es una API RESTFul?</h2>
           </section>
           <section>
-            <h3>Historia</h3>
+            <p>2000 => Se origino por 1ra vez en la tesis doctoral de Roy Fielding</p>
+            <br>
+            <pre><code class="groovy" data-trim contenteditable>
+public static final String REST = 'Representational State Transfer'
+              
+assert REST != HTTP + (JSON || XML)
+assert REST == 'Principios de arquitectura de Software'
+					</code></pre>
+          </section>
+          <section>
+            <h3>REST debe cumplir seis restricciones</h3>
+            <ul>
+              <li>Interfaz Uniforme</li>
+              <li>Sin estado</li>
+              <li>Cacheable</li>
+              <li>Cliente servidor</li>
+              <li>Sistema en capas</li>
+              <li>Demanda de codigo (opcional)</li>
+            </ul>
+            <a href="http://www.restapitutorial.com">http://www.restapitutorial.com</a>
+          </section>
+          <section>
+            <h3>Diseños fundamentales clave</h3>
+            <ul>
+              <li>Protocolo cliente/servidor sin estado</li>
+              <li>Operaciones bien definidas (GET, POST, PUT, DELETE)</li>
+              <li>Cada recurso su propia URI</li>
+              <li>Uso de hypermedia</li>
+            </ul>
           </section>
           <section>
             <h3>SOAP vs REST vs GRPC</h3>
-          </section>
-          <section>
-            <h3>Definicion</h3>
           </section>
         </section>
 
@@ -54,18 +79,101 @@
         <section>
           <section>
             <h2>Richardson Maturiy Model</h2>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png" alt="Richardson-Maturiy-Model">
           </section>
           <section>
             <h3>Level 0: the swamp of pox</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="level-0">
+          </section>
+          <section>
+            <h3>Level 0: the swamp of pox</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>POST</td>
+                <td>appointmentService</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>appointmentService</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 1: resources</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="level-1">
+          </section>
+          <section>
+            <h3>Level 1: resources</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>POST</td>
+                <td>doctor/mjones</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>slots/1234</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 2: verbs</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="level-2">
+          </section>
+          <section>
+            <h3>Level 2: verbs</h3>
+            <table>
+              <thead>
+              <tr>
+                <th>HTTP Verb</th>
+                <th>URI</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>GET</td>
+                <td>doctor/mjones</td>
+                <td>get open slot list</td>
+              </tr>
+              <tr>
+                <td>POST</td>
+                <td>slots/1234</td>
+                <td>make appointment</td>
+              </tr>
+              </tbody>
+            </table>
           </section>
           <section>
             <h3>Level 3: hypermedia controls</h3>
+            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
+          </section>
+          <section>
+            <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
+              Martin Fowler - Richardson Maturity Model
+            </a>
+            <img src="https://martinfowler.com/img/mf-cologne.jpg" alt="Martin-Fowler">
           </section>
         </section>
 
