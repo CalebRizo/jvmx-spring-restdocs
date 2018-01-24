@@ -1,236 +1,247 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>JVMX Spring REST Docs</title>
+  <title>JVMX Spring REST Docs</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/night.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/night.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
+  <!-- Printing and PDF exports -->
+  <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-        <!-- PRESENTACION -->
-				<section>
-          <section>
-            <h2>Spring REST Docs: Hey, las pruebas y la documentacion trabajando juntas</h2>
-          </section>
-          <section>
-            <h3>Contacto</h3>
-          </section>
-        </section>
 
-        <!-- API RESTFul -->
-				<section>
-          <section>
-            <h2>¿Que es una API RESTFul?</h2>
-          </section>
-          <section>
-            <p>2000 => Se origino por 1ra vez en la tesis doctoral de Roy Fielding</p>
-            <br>
-            <pre><code class="groovy" data-trim contenteditable>
+
+
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <!-- PRESENTACION -->
+    <section>
+      <section>
+        <h2>Spring REST Docs: Hey, las pruebas y la documentacion trabajando juntas</h2>
+      </section>
+      <section>
+        <h3>Contacto</h3>
+      </section>
+    </section>
+
+    <!-- API RESTFul -->
+    <section>
+      <section>
+        <h2>¿Que es una API RESTFul?</h2>
+      </section>
+      <section>
+        <p>2000 => Se origino por 1ra vez en la tesis doctoral de Roy Fielding</p>
+        <br>
+        <pre><code class="groovy" data-trim contenteditable>
 public static final String REST = 'Representational State Transfer'
               
 assert REST != HTTP + (JSON || XML)
 assert REST == 'Principios de arquitectura de Software'
 					</code></pre>
-          </section>
-          <section>
-            <h3>REST debe cumplir seis restricciones</h3>
-            <ul>
-              <li>Interfaz Uniforme</li>
-              <li>Sin estado</li>
-              <li>Cacheable</li>
-              <li>Cliente servidor</li>
-              <li>Sistema en capas</li>
-              <li>Demanda de codigo (opcional)</li>
-            </ul>
-            <a href="http://www.restapitutorial.com">http://www.restapitutorial.com</a>
-          </section>
-          <section>
-            <h3>Diseños fundamentales clave</h3>
-            <ul>
-              <li>Protocolo cliente/servidor sin estado</li>
-              <li>Operaciones bien definidas (GET, POST, PUT, DELETE)</li>
-              <li>Cada recurso su propia URI</li>
-              <li>Uso de hypermedia</li>
-            </ul>
-          </section>
-          <section>
-            <h3>SOAP vs REST vs GRPC</h3>
-          </section>
-        </section>
+      </section>
+      <section>
+        <h3>REST debe cumplir seis restricciones</h3>
+        <ul>
+          <li>Tener una interfaz uniforme</li>
+          <li>No tener estado</li>
+          <li>Ser Cacheable</li>
+          <li>Cumplir con la arquitectura Cliente-Servidor</li>
+          <li>Ser un sistema en capas</li>
+          <li>La demanda de código debe ser posible (opcional)</li>
+        </ul>
+        <a href="http://www.restapitutorial.com">http://www.restapitutorial.com</a>
+      </section>
+      <section>
+        <h3>Diseños fundamentales clave</h3>
+        <ul>
+          <li>Protocolo cliente/servidor sin estado</li>
+          <li>Operaciones bien definidas (GET, POST, PUT, DELETE)</li>
+          <li>Cada recurso su propia URI</li>
+          <li>Uso de hypermedia</li>
+        </ul>
+      </section>
+      <section>
+        <h3>SOAP vs REST vs GRPC</h3>
+      </section>
+    </section>
 
-        <!-- Richardson Maturiy Model -->
-        <section>
-          <section>
-            <h2>Richardson Maturiy Model</h2>
-            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png" alt="Richardson-Maturiy-Model">
-          </section>
-          <section>
-            <h3>Level 0: the swamp of pox</h3>
-            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="level-0">
-          </section>
-          <section>
-            <h3>Level 0: the swamp of pox</h3>
-            <table>
-              <thead>
-              <tr>
-                <th>HTTP Verb</th>
-                <th>URI</th>
-                <th>Operation</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>POST</td>
-                <td>appointmentService</td>
-                <td>get open slot list</td>
-              </tr>
-              <tr>
-                <td>POST</td>
-                <td>appointmentService</td>
-                <td>make appointment</td>
-              </tr>
-              </tbody>
-            </table>
-          </section>
-          <section>
-            <h3>Level 1: resources</h3>
-            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="level-1">
-          </section>
-          <section>
-            <h3>Level 1: resources</h3>
-            <table>
-              <thead>
-              <tr>
-                <th>HTTP Verb</th>
-                <th>URI</th>
-                <th>Operation</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>POST</td>
-                <td>doctor/mjones</td>
-                <td>get open slot list</td>
-              </tr>
-              <tr>
-                <td>POST</td>
-                <td>slots/1234</td>
-                <td>make appointment</td>
-              </tr>
-              </tbody>
-            </table>
-          </section>
-          <section>
-            <h3>Level 2: verbs</h3>
-            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="level-2">
-          </section>
-          <section>
-            <h3>Level 2: verbs</h3>
-            <table>
-              <thead>
-              <tr>
-                <th>HTTP Verb</th>
-                <th>URI</th>
-                <th>Operation</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>GET</td>
-                <td>doctor/mjones</td>
-                <td>get open slot list</td>
-              </tr>
-              <tr>
-                <td>POST</td>
-                <td>slots/1234</td>
-                <td>make appointment</td>
-              </tr>
-              </tbody>
-            </table>
-          </section>
-          <section>
-            <h3>Level 3: hypermedia controls</h3>
-            <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
-          </section>
-          <section>
-            <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
-              Martin Fowler - Richardson Maturity Model
-            </a>
-            <img src="https://martinfowler.com/img/mf-cologne.jpg" alt="Martin-Fowler">
-          </section>
-        </section>
+    <!-- Richardson Maturiy Model -->
+    <section>
+      <section>
+        <h2>Richardson Maturiy Model</h2>
+        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png"
+             alt="Richardson-Maturiy-Model">
+      </section>
+      <section>
+        <h3>Level 0: the swamp of pox</h3>
+        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="level-0">
+      </section>
+      <section>
+        <h3>Level 0: the swamp of pox</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>HTTP Verb</th>
+            <th>URI</th>
+            <th>Operation</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>POST</td>
+            <td>appointmentService</td>
+            <td>get open slot list</td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td>appointmentService</td>
+            <td>make appointment</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h3>Level 1: resources</h3>
+        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="level-1">
+      </section>
+      <section>
+        <h3>Level 1: resources</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>HTTP Verb</th>
+            <th>URI</th>
+            <th>Operation</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>POST</td>
+            <td>/doctor/mjones</td>
+            <td>get open slot list</td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td>/slots/1234</td>
+            <td>make appointment</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h3>Level 2: verbs</h3>
+        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="level-2">
+      </section>
+      <section>
+        <h3>Level 2: verbs</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>HTTP Verb</th>
+            <th>URI</th>
+            <th>Operation</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>GET</td>
+            <td>/doctor/mjones</td>
+            <td>get open slot list</td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td>/slots/1234</td>
+            <td>make appointment</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h3>Level 3: hypermedia controls</h3>
+        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
+      </section>
+      <section>
+        <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
+          Martin Fowler - Richardson Maturity Model
+        </a>
+        <img src="https://martinfowler.com/img/mf-cologne.jpg" alt="Martin-Fowler">
+      </section>
+    </section>
 
-        <!-- PRUEBAS -->
-        <section>
-          <section>
-            <h2>Pruebas</h2>
-          </section>
-          <section>
-            <h3>backend definition contract vs frontend definition contract</h3>
-          </section>
-          <section>
-            <h3>BDD and TDD</h3>
-          </section>
-          <section>
-            <h3>Types of tests</h3>
-          </section>
-          <section>
-            <h3>tools (JUnit, Spock)</h3>
-          </section>
-          <section>
-            <h3>manual tests (curl, httpie, postman, insomnia)</h3>
-          </section>
-        </section>
+    <!-- PRUEBAS -->
+    <section>
+      <section data-background="https://media.giphy.com/media/5xrkJe3IJKSze/giphy.gif">
+        <h2>Pruebas (Testing)</h2>
+      </section>
+      <section>
+        <h3>Contract Fisrt Approach vs Contract Last Approach</h3>
+      </section>
+      <section>
+        <h3>BDD and TDD</h3>
+        <img src="https://qph.ec.quoracdn.net/main-qimg-341f02eb4b8f2095629aae0949f9eef2"
+             alt="TDD">
+      </section>
+      <section>
+        <h3>TDD</h3>
+        <img src="https://d2h1nbmw1jjnl.cloudfront.net/ckeditor/pictures/data/000/000/136/content/graphic_1_jpg.png"
+             alt="TDD">
+      </section>
+      <section>
+        <h3>Types of tests</h3>
+      </section>
+      <section>
+        <h3>tools (JUnit, Spock)</h3>
+      </section>
+      <section>
+        <h3>manual tests (curl, httpie, postman, insomnia)</h3>
+      </section>
+    </section>
 
-        <!-- Documentacion -->
-        <section>
-          <section>
-            <h2>Documentacion</h2>
-          </section>
-          <section>
-            <h3>How to make documentation</h3>
-          </section>
-          <section>
-            <h3>Examples</h3>
-          </section>
-          <section>
-            <h3>tools (Swagger, REST Docs)</h3>
-          </section>
-        </section>
+    <!-- Documentacion -->
+    <section>
+      <section>
+        <h2>Documentacion</h2>
+      </section>
+      <section>
+        <h3>How to make documentation</h3>
+      </section>
+      <section>
+        <h3>Examples</h3>
+      </section>
+      <section>
+        <h3>tools (Swagger, REST Docs)</h3>
+      </section>
+    </section>
 
-        <!-- Diseño -->
-        <section>
-          <h2>Diseño (RAML)</h2>
-        </section>
+    <!-- Diseño -->
+    <section>
+      <h2>Diseño (RAML)</h2>
+    </section>
 
-        <!-- Demo -->
-        <section>
-          <h1>Demo</h1>
-        </section>
-			</div>
-		</div>
+    <!-- Demo -->
+    <section>
+      <h1>Demo</h1>
+    </section>
+  </div>
+</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-		<script>
+<script>
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
@@ -242,6 +253,9 @@ assert REST == 'Principios de arquitectura de Software'
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-		</script>
-	</body>
+
+
+
+</script>
+</body>
 </html>
