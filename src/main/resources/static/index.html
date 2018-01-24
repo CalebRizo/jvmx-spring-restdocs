@@ -171,7 +171,47 @@ assert REST == 'Principios de arquitectura de Software'
       </section>
       <section>
         <h3>Level 3: hypermedia controls</h3>
-        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
+        <img style="background-color: white;"
+             src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png"
+             alt="level-3">
+      </section>
+      <section>
+        <h3>Level 3: hypermedia controls</h3>
+        <pre><code class="json" data-trim contenteditable>
+// Request
+GET /doctors/mjones/slots?date=20100104&status=open
+
+// Response:
+HTTP/1.1 200 OK
+[
+  {
+    id: "1234",
+    doctor: "mjones",
+    start: "1400",
+    end: "1450",
+    links: [ {
+      rel: "self",
+      href: "http://localhost:8080/slots/1234"
+    }, {
+      rel : "delete",
+      href: "http://localhost:8080/slots/1234"
+    ]
+  },
+  {
+    id: "5678",
+    doctor: "mjones",
+    start: "1600",
+    end: "1650",
+    links: [ {
+      rel: "self",
+      href: "http://localhost:8080/slots/5678"
+    }, {
+      rel : "delete",
+      href: "http://localhost:8080/slots/5678"
+    ]
+  },
+]
+        </code></pre>
       </section>
       <section>
         <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
@@ -191,13 +231,14 @@ assert REST == 'Principios de arquitectura de Software'
       </section>
       <section>
         <h3>BDD and TDD</h3>
-        <img src="https://qph.ec.quoracdn.net/main-qimg-341f02eb4b8f2095629aae0949f9eef2"
+        <img style="background-color: white;"
+             src="https://qph.ec.quoracdn.net/main-qimg-341f02eb4b8f2095629aae0949f9eef2"
              alt="TDD">
       </section>
-      <section>
+      <section data-background="http://69.164.212.71/wp-content/uploads/2014/12/bdd-best-practices-e1433515152640.png">
+      </section>
+      <section data-background="https://d2h1nbmw1jjnl.cloudfront.net/ckeditor/pictures/data/000/000/136/content/graphic_1_jpg.png">
         <h3>TDD</h3>
-        <img src="https://d2h1nbmw1jjnl.cloudfront.net/ckeditor/pictures/data/000/000/136/content/graphic_1_jpg.png"
-             alt="TDD">
       </section>
       <section>
         <h3>Types of tests</h3>
@@ -253,9 +294,6 @@ assert REST == 'Principios de arquitectura de Software'
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-
-
-
 </script>
 </body>
 </html>
