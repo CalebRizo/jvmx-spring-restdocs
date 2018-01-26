@@ -64,3 +64,6 @@ jar {
 		into 'static/docs'
 	}
 }
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
