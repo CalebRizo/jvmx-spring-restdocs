@@ -20,8 +20,6 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 
-
-
   </script>
 </head>
 <body>
@@ -30,7 +28,8 @@
     <!-- PRESENTACION -->
     <section>
       <section>
-        <h2>Spring REST Docs: Hey, las pruebas y la documentacion trabajando juntas</h2>
+        <h2>Spring REST Docs:</h2>
+        <h2>Hey, las pruebas y la documentacion trabajando juntas!</h2>
       </section>
       <section>
         <h3>Contacto</h3>
@@ -171,7 +170,47 @@ assert REST == 'Principios de arquitectura de Software'
       </section>
       <section>
         <h3>Level 3: hypermedia controls</h3>
-        <img src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="level-3">
+        <img style="background-color: white;"
+             src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png"
+             alt="level-3">
+      </section>
+      <section>
+        <h3>Level 3: hypermedia controls</h3>
+        <pre><code class="json" data-trim contenteditable>
+// Request
+GET /doctors/mjones/slots?date=20100104&status=open
+
+// Response:
+HTTP/1.1 200 OK
+[
+  {
+    id: "1234",
+    doctor: "mjones",
+    start: "1400",
+    end: "1450",
+    links: [ {
+      rel: "self",
+      href: "http://localhost:8080/slots/1234"
+    }, {
+      rel : "delete",
+      href: "http://localhost:8080/slots/1234"
+    ]
+  },
+  {
+    id: "5678",
+    doctor: "mjones",
+    start: "1600",
+    end: "1650",
+    links: [ {
+      rel: "self",
+      href: "http://localhost:8080/slots/5678"
+    }, {
+      rel : "delete",
+      href: "http://localhost:8080/slots/5678"
+    ]
+  },
+]
+        </code></pre>
       </section>
       <section>
         <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">
@@ -187,27 +226,98 @@ assert REST == 'Principios de arquitectura de Software'
         <h2>Pruebas (Testing)</h2>
       </section>
       <section>
-        <h3>Contract Fisrt Approach vs Contract Last Approach</h3>
+        <h3>Contract Fisrt Approach</h3>
+        <h4>Diseña => Codea </h4>
+        <p>(API bien definida)</p>
+        <h3>vs</h3>
+        <h3>Contract Last Approach</h3>
+        <h4>Codea => Documenta</h4>
+        <p>(API por casualidad)</p>
       </section>
       <section>
         <h3>BDD and TDD</h3>
-        <img src="https://qph.ec.quoracdn.net/main-qimg-341f02eb4b8f2095629aae0949f9eef2"
+        <img style="background-color: white;"
+             src="https://qph.ec.quoracdn.net/main-qimg-341f02eb4b8f2095629aae0949f9eef2"
              alt="TDD">
       </section>
-      <section>
+      <section data-background="http://69.164.212.71/wp-content/uploads/2014/12/bdd-best-practices-e1433515152640.png">
+      </section>
+      <section data-background="https://d2h1nbmw1jjnl.cloudfront.net/ckeditor/pictures/data/000/000/136/content/graphic_1_jpg.png">
         <h3>TDD</h3>
-        <img src="https://d2h1nbmw1jjnl.cloudfront.net/ckeditor/pictures/data/000/000/136/content/graphic_1_jpg.png"
-             alt="TDD">
       </section>
       <section>
-        <h3>Types of tests</h3>
+        <h3>Niveles de pruebas</h3>
+        <img src="http://crescenttech.in/blog/wp-content/uploads/crescent1.jpg" alt="testing-levels">
       </section>
       <section>
-        <h3>tools (JUnit, Spock)</h3>
+        <h3>Niveles de pruebas</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>Resumen</th>
+            <th>Proposito</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Unitarias</td>
+            <td>Se prueban unidades o componentes del sistema</td>
+            <td>Validar cada componente deacuerdo a su diseño</td>
+          </tr>
+          <tr>
+            <td>Integracion</td>
+            <td>Combinacion de los componentes para probarlo como un grupo</td>
+            <td>Exponer errores en la intreacion de los componentes</td>
+          </tr>
+          </tbody>
+        </table>
       </section>
       <section>
-        <h3>manual tests (curl, httpie, postman, insomnia)</h3>
+        <h3>Niveles de pruebas</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>Resumen</th>
+            <th>Proposito</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Sistema</td>
+            <td>Se prueba el sistema integrado en su totalidad</td>
+            <td>Evalua sistema este conmforme a los requerimientos</td>
+          </tr>
+          <tr>
+            <td>Aceptacion</td>
+            <td>Se prueba la aceptacion que tiene el sistema</td>
+            <td>Comprobar el sistema deacuerdo a los requeriminetos de negocio</td>
+          </tr>
+          </tbody>
+        </table>
       </section>
+      <section data-background="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+        <h3>Pruebas manuales</h3>
+      </section>
+      <section>
+        <ul>
+          <li><a href="https://curl.haxx.se/">curl</a></li>
+          <li><a href="https://httpie.org/">httpie</a></li>
+          <li><a href="https://www.getpostman.com">Postman</a></li>
+          <li><a href="https://insomnia.rest/">Insomnia</a></li>
+        </ul>
+      </section>
+      <section data-background="https://media.giphy.com/media/l41lUJ1YoZB1lHVPG/giphy.gif">
+        <h3>Pruebas automatizadas</h3>
+      </section>
+      <section>
+        <ul>
+          <li><a href="http://junit.org/junit5/">JUnit 5</a></li>
+          <li><a href="http://spockframework.org/">Spock</a></li>
+        </ul>
+      </section>
+      <section data-background="https://media.giphy.com/media/41I5c7m6CNqHm/giphy.gif"></section>
     </section>
 
     <!-- Documentacion -->
@@ -216,19 +326,57 @@ assert REST == 'Principios de arquitectura de Software'
         <h2>Documentacion</h2>
       </section>
       <section>
-        <h3>How to make documentation</h3>
+        <h3>¿Quien es la audiencia?</h3>
+        <ul>
+          <li>Los recien llegados</li>
+          <li>Los que debuggean</li>
+          <li>Los que toman las decisiones</li>
+          <li>Los que buscan solucionar necesidades</li>
+        </ul>
       </section>
       <section>
-        <h3>Examples</h3>
+        <h3>¿Que debe tener el API?</h3>
+        <ul>
+          <li>Lo basico</li>
+          <li>Descripcion en lenguaje basico</li>
+          <li>Facil de leer y de copiar</li>
+          <li>Tutoriales</li>
+          <li>Explicacion de posibles respuestas</li>
+          <li>Ejemplos en multiples tecnologias</li>
+          <li>Librerias de clientes en diferentes lenguajes</li>
+          <li>Concisa vision completa del API</li>
+        </ul>
       </section>
       <section>
-        <h3>tools (Swagger, REST Docs)</h3>
+        <h3>Ejemplos</h3>
+        <ul>
+          <li><a href="https://docs.context.io/">Context.io</a></li>
+          <li><a href="https://stripe.com/docs/">Stripe</a></li>
+          <li><a href="https://beta.developer.spotify.com/documentation/web-api/reference/">Spotify</a></li>
+          <li><a href="https://www.openpay.mx/docs/api/">OpenPay</a></li>
+        </ul>
+      </section>
+      <section>
+        <a href="https://bradfults.com/the-best-api-documentation-b9e46400379a">Brad Fults - The Best API Documentation</a>
+      </section>
+      <section>
+        <h3>Herramientas</h3>
+        <ul>
+          <li><a href="https://swagger.io/">Swagger</a></li>
+          <li><a href="https://projects.spring.io/spring-restdocs/">Spring REST Docs</a></li>
+          <li><a href="http://asciidoctor.org/">Asciidoctor</a></li>
+        </ul>
       </section>
     </section>
 
     <!-- Diseño -->
-    <section>
-      <h2>Diseño (RAML)</h2>
+    <section data-background="https://renuevo.com/wp-content/uploads/parentesis.png">
+      <h2 style="color: black;">Diseño</h2>
+      <a href="https://raml.org/">
+        <img
+         src="https://image.slidesharecdn.com/raml10release-151123194957-lva1-app6892/95/raml-10-release-1-638.jpg?cb=1448308306"
+         alt="RAML">
+      </a>
     </section>
 
     <!-- Demo -->
@@ -253,8 +401,6 @@ assert REST == 'Principios de arquitectura de Software'
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-
-
 
 </script>
 </body>
