@@ -3,18 +3,41 @@ title: JVMX Spring REST Docs API Demo
 baseUri: https://jvmx-spring-restdocs.herokuapp.com/v1
 version: 1
 
+types:
+  Event:
+    type: object
+    properties:
+      name: string
+      place: string
+    example:
+      name: EDC
+      place: CDMX
+
 /events:
   get:
     description: Retrieves a collection of events
+  post:
+    description: Creates a new event
+    body:
+      application/json:
+        type: Event
   /{eventId}:
     get:
       description: Retrieves a specific event
+    /artists:
+      get:
+        description: Retrieves the artists that will participate in the event
 
 /artists:
+  get:
+    description: Retrieves a collection of artists
   /{artistId}:
+    get:
+      description: Retrieves a specific event
 
 /albums:
   /{albumId}:
 
 /songs:
   /{songId}:
+
