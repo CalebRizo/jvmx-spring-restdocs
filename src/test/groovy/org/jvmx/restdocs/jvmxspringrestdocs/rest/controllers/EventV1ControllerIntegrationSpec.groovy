@@ -1,4 +1,4 @@
-package org.jvmx.restdocs.jvmxspringrestdocs
+package org.jvmx.restdocs.jvmxspringrestdocs.rest.controllers
 
 import static org.springframework.http.MediaType.APPLICATION_JSON
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document

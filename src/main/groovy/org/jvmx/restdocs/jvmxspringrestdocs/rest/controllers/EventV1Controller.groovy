@@ -1,4 +1,4 @@
-package org.jvmx.restdocs.jvmxspringrestdocs
+package org.jvmx.restdocs.jvmxspringrestdocs.rest.controllers
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
