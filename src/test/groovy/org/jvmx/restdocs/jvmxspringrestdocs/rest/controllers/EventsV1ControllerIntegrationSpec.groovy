@@ -14,6 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup
 
 import org.junit.Rule
+import org.jvmx.restdocs.jvmxspringrestdocs.rest.model.EventCommand
+import org.jvmx.restdocs.jvmxspringrestdocs.rest.services.EventsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.restdocs.JUnitRestDocumentation
@@ -33,6 +35,9 @@ class EventsV1ControllerIntegrationSpec extends Specification {
   @Autowired
   private WebApplicationContext context
 
+  @Autowired
+  EventsService eventsService
+
   void setup() {
     mockMvc = webAppContextSetup(context)
       .apply(documentationConfiguration(restDocumentation))
@@ -40,6 +45,8 @@ class EventsV1ControllerIntegrationSpec extends Specification {
   }
 
   Should 'get a list of events'() {
+    given:
+      eventsService.create(new EventCommand(name: 'EDC', place: 'CDMX'))
     when:
       Should result = mockMvc
         .perform(get('/v1/events').accept(APPLICATION_JSON))
