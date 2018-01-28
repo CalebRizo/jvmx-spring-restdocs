@@ -2,17 +2,23 @@ package org.jvmx.restdocs.jvmxspringrestdocs
 
 import static org.springframework.http.MediaType.APPLICATION_JSON
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
+import static org.springframework.restdocs.payload.JsonFieldType.STRING
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup
 
 import org.junit.Rule
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.restdocs.JUnitRestDocumentation
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.ResultActions
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.test.web.servlet.ResultActions as Should
 import org.springframework.web.context.WebApplicationContext
 import spock.lang.Specification
 
@@ -28,19 +34,34 @@ class EventV1ControllerIntegrationSpec extends Specification {
   private WebApplicationContext context
 
   void setup() {
-    mockMvc = MockMvcBuilders.webAppContextSetup(context)
-      .apply(MockMvcRestDocumentation.documentationConfiguration(restDocumentation))
+    mockMvc = webAppContextSetup(context)
+      .apply(documentationConfiguration(restDocumentation))
       .build()
   }
 
-  def 'get a list of events'() {
+  Should 'get a list of events'() {
     when:
-      ResultActions result = mockMvc
+      Should result = mockMvc
         .perform(get('/v1/events').accept(APPLICATION_JSON))
 
     then:
       result
         .andExpect(status().isOk())
-        .andDo(document('get-eventsV1'))
+        .andExpect(jsonPath('events').isArray())
+        .andExpect(jsonPath('event[0].name').value('EDC'))
+        .andDo(document('eventsV1/get', preprocessResponse(prettyPrint()),
+        responseFields(
+          fieldWithPath('events[]')
+            .description('List of events')
+        ).andWithPrefix('events[].',
+          [
+            fieldWithPath('name')
+              .description('Event name')
+              .type(STRING),
+            fieldWithPath('place')
+              .description('Place where the event will be')
+              .type(STRING),
+          ]
+        )))
   }
 }
