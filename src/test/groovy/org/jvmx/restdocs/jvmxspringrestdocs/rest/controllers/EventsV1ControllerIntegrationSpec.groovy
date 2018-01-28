@@ -6,6 +6,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
+import static org.springframework.restdocs.payload.JsonFieldType.NUMBER
 import static org.springframework.restdocs.payload.JsonFieldType.STRING
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields
@@ -55,13 +56,16 @@ class EventsV1ControllerIntegrationSpec extends Specification {
       result
         .andExpect(status().isOk())
         .andExpect(jsonPath('events').isArray())
-        .andExpect(jsonPath('event[0].name').value('EDC'))
+        .andExpect(jsonPath('events[0].name').value('EDC'))
         .andDo(document('eventsV1/get', preprocessResponse(prettyPrint()),
         responseFields(
           fieldWithPath('events[]')
             .description('List of events')
         ).andWithPrefix('events[].',
           [
+            fieldWithPath('id')
+              .description('Event id')
+              .type(NUMBER),
             fieldWithPath('name')
               .description('Event name')
               .type(STRING),
