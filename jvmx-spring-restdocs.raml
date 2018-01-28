@@ -12,10 +12,24 @@ types:
     example:
       name: EDC
       place: CDMX
+  Artist:
+    type: object
+    properties:
+      name: string
+      musicGenre: string
+      albumes: array
+
+resourceTypes:
+  events:
 
 /events:
   get:
     description: Retrieves a collection of events
+    responses:
+      200:
+        body:
+          application/json:
+            schema: array
   post:
     description: Creates a new event
     body:
@@ -31,6 +45,11 @@ types:
 /artists:
   get:
     description: Retrieves a collection of artists
+  post:
+    description: Submits an artists to the system
+    body:
+      application/json:
+        type: Artist
   /{artistId}:
     get:
       description: Retrieves a specific event
