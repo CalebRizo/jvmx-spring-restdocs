@@ -82,9 +82,16 @@ The Events resources is used to create and list notes
 
 
 
-[[resources-notes-list]]
-=== Listing notes
+[[resources-events-list]]
+=== Listing events
 
 A `GET` request will list all of the service's notes.
 
-operation::get-eventsV1[snippets='curl-request,httpie-request,http-response']
+operation::eventsV1/getAll[snippets='curl-request,httpie-request,http-response,response-fields']
+
+[[resources-events-create]]
+=== Creating an event
+
+A `POST` request is used to create an event.
+
+operation::eventsV1/post[snippets='request-fields,curl-request,httpie-request,http-response,response-fields']
