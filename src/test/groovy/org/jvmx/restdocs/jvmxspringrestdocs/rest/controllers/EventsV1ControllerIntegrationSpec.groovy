@@ -23,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext
 import spock.lang.Specification
 
 @SpringBootTest
-class EventV1ControllerIntegrationSpec extends Specification {
+class EventsV1ControllerIntegrationSpec extends Specification {
 
   @Rule
   public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation()
