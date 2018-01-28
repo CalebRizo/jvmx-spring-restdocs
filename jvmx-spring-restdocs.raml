@@ -18,45 +18,129 @@ types:
       name: string
       musicGenre: string
       albumes: array
+  Album:
+    type: object
+    properties:
+      name: string
+    example:
+      name: Push
+  Song:
+    type: object
+    properties:
+      name: string
+    example:
+      name: Hollow
 
 resourceTypes:
-  events:
+  collection:
+    description: Collection of available <<resourcePathName>>
+    get:
+      description: Get a list of <<resourcePathName>> based on the song title.
+      responses:
+        200:
+          body:
+            application/json:
+    post:
+      description: |
+        Add a new <<resourcePathName|!singularize>> to Jukebox.
+      queryParameters:
+        access_token:
+          description: "The access token provided by the authentication application"
+          example: AABBCCDD
+          required: true
+          type: string
+      body:
+        application/json:
+          type: <<resourcePathName|!singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "message": "The <<resourcePathName|!singularize>> has been properly entered" }
+  collection-item:
+    description: Entity representing a <<resourcePathName|!singularize>>
+    get:
+      description: |
+        Get the <<resourcePathName|!singularize>>
+        with <<resourcePathName|!singularize>>Id =
+        {<<resourcePathName|!singularize>>Id}
+      responses:
+        200:
+          body:
+            application/json:
+        404:
+          body:
+            application/json:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
 
 /events:
+  type: collection
   get:
-    description: Retrieves a collection of events
     responses:
       200:
         body:
           application/json:
-            schema: array
+            example: |
+              {
+                "songs": [
+                  {
+                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                    "name": "EDC",
+                    "place": "CDMX"
+                  },
+                  {
+                    "id": "550e8400-e29b-41d4-a716-446655440111",
+                    "name": "Pal Norte",
+                    "place": "Monterrey"
+                  },
+                  {
+                    "id": "550e8400-e29b-41d4-a716-446655440222",
+                    "name": "EDC",
+                    "place": "CDMx"
+                  }
+                ]
+              }
   post:
-    description: Creates a new event
     body:
       application/json:
         type: Event
   /{eventId}:
+    type: collection-item
     get:
-      description: Retrieves a specific event
     /artists:
       get:
-        description: Retrieves the artists that will participate in the event
 
 /artists:
+  type: collection
   get:
-    description: Retrieves a collection of artists
   post:
-    description: Submits an artists to the system
     body:
       application/json:
         type: Artist
   /{artistId}:
+    type: collection-item
     get:
-      description: Retrieves a specific event
 
 /albums:
+  type: collection
+  get:
+  post:
+    body:
+      application/json:
+        type: Album
   /{albumId}:
+    type: collection-item
+    get:
 
 /songs:
+  type: collection
+  get:
+  post:
+    body:
+      application/json:
+        type: Song
   /{songId}:
-
+   type: collection-item
+   get:
