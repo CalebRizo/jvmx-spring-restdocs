@@ -1,5 +1,7 @@
 package org.jvmx.restdocs.jvmxspringrestdocs.rest.services
 
+import static org.springframework.web.util.UriComponentsBuilder.fromUriString
+
 import org.jvmx.restdocs.jvmxspringrestdocs.persistence.model.Event
 import org.jvmx.restdocs.jvmxspringrestdocs.persistence.repositories.EventsRepository
 import org.jvmx.restdocs.jvmxspringrestdocs.rest.model.EventCommand
@@ -11,12 +13,19 @@ class EventsService {
   @Autowired
   EventsRepository eventsRepository
 
-  Event create(EventCommand command) {
-    Event newEvent = new Event(
+  Map create(EventCommand command) {
+    Event event = new Event(
       name: command.name,
       place: command.place
     )
-    eventsRepository.save(newEvent)
+    eventsRepository.save(event)
+
+    URI uri = fromUriString("/v1/events/${event.id}").build().toUri()
+
+    [
+      event: event,
+      uri  : uri,
+    ]
   }
 
   List<Event> getAll() {

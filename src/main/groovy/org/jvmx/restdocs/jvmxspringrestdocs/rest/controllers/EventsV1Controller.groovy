@@ -24,9 +24,8 @@ class EventsV1Controller {
 
   @PostMapping
   HttpEntity<Event> create(@RequestBody EventCommand command) {
-    Event event = eventsService.create(command)
-    URI uri = fromUriString("/v1/events/${event.id}").build().toUri()
+    Map result = eventsService.create(command)
 
-    created(uri).body(event)
+    created(result.uri).body(result.event)
   }
 }
