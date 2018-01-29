@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service
 class EventsService {
   @Autowired
   EventsRepository eventsRepository
+  @Autowired
+  ValidationService validationService
 
   Map create(EventCommand command) {
     Event event = new Event(
       name: command.name,
       place: command.place
     )
+
+    validationService.validate(event)
     eventsRepository.save(event)
 
     URI uri = fromUriString("/v1/events/${event.id}").build().toUri()
