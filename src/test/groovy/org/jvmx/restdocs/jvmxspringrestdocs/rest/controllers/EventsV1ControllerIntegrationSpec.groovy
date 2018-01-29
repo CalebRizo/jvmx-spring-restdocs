@@ -85,15 +85,14 @@ class EventsV1ControllerIntegrationSpec extends Specification {
   }
 
   Should 'create a new event'() {
-    String name = 'Pal Norte'
     given:
+      String name = 'Pal Norte'
       EventCommand command = new EventCommand(name: name, place: 'Monterrey')
       String bodyRequest = toJson(command)
 
     when:
       Should result = mockMvc
         .perform(post('/v1/events')
-        .accept(APPLICATION_JSON)
         .contentType(APPLICATION_JSON)
         .content(bodyRequest))
 
@@ -104,6 +103,30 @@ class EventsV1ControllerIntegrationSpec extends Specification {
         .andDo(document('eventsV1/post', preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
         requestFields(EVENT_COMMAND_DESCRIPTORS),
         responseFields(EVENT_RESPONSE_DESCRIPTORS),
+      ))
+  }
+
+  Should 'make a bad request creating a new event'() {
+    given:
+      EventCommand command = new EventCommand(name: 'Hell & Heaven')
+      String bodyRequest = toJson(command)
+
+    when:
+      Should result = mockMvc
+        .perform(post('/v1/events')
+        .contentType(APPLICATION_JSON)
+        .content(bodyRequest))
+
+    then:
+      result
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath('message').isString())
+        .andDo(document('eventsV1/post', preprocessResponse(prettyPrint()),
+        responseFields(
+          fieldWithPath('message')
+            .type(STRING)
+            .description('The bad request message')
+        )
       ))
   }
 }
