@@ -60,6 +60,7 @@ use of HTTP status codes.
 | The requested resource did not exist
 |===
 
+operation::eventsV1/postBadRequest[snippets='http-response, response-body, response-fields']
 
 [[overview-hypermedia]]
 == Hypermedia

@@ -121,7 +121,7 @@ class EventsV1ControllerIntegrationSpec extends Specification {
       result
         .andExpect(status().isBadRequest())
         .andExpect(jsonPath('cause').isString())
-        .andDo(document('eventsV1/post', preprocessResponse(prettyPrint()),
+        .andDo(document('eventsV1/postBadRequest', preprocessResponse(prettyPrint()),
         responseFields(
           fieldWithPath('cause')
             .type(STRING)
