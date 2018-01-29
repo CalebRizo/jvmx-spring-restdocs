@@ -7,8 +7,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*
-import static org.springframework.restdocs.payload.JsonFieldType.NUMBER
-import static org.springframework.restdocs.payload.JsonFieldType.STRING
+import static org.springframework.restdocs.payload.JsonFieldType.*
 import static org.springframework.restdocs.payload.PayloadDocumentation.*
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -80,6 +79,7 @@ class EventsV1ControllerIntegrationSpec extends Specification {
         responseFields(
           fieldWithPath('events[]')
             .description('List of events')
+            .type(ARRAY)
         ).andWithPrefix('events[].', EVENT_RESPONSE_DESCRIPTORS)
       ))
   }
@@ -120,13 +120,29 @@ class EventsV1ControllerIntegrationSpec extends Specification {
     then:
       result
         .andExpect(status().isBadRequest())
-        .andExpect(jsonPath('message').isString())
+        .andExpect(jsonPath('cause').isString())
         .andDo(document('eventsV1/post', preprocessResponse(prettyPrint()),
         responseFields(
-          fieldWithPath('message')
+          fieldWithPath('cause')
             .type(STRING)
-            .description('The bad request message')
-        )
+            .description('The cause of the bad request reponse'),
+          fieldWithPath('violations[]')
+            .type(ARRAY)
+            .description('The validation errors'),
+        ).andWithPrefix('violations[].', [
+          fieldWithPath('message')
+            .description('Violation message')
+            .type(STRING),
+          fieldWithPath('invalidValue')
+            .description('The invalid value')
+            .type(STRING),
+          fieldWithPath('entity')
+            .description('The invalid entity')
+            .type(STRING),
+          fieldWithPath('property')
+            .description('Incorrect property')
+            .type(STRING),
+        ])
       ))
   }
 }
